@@ -117,9 +117,15 @@
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="data\map.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>XCOPY "$(SolutionDir)PUBG_Cartographer\data\VirtualKeys.xml" "$(TargetDir)\data\" /S /Y
-XCOPY "$(SolutionDir)PUBG_Cartographer\data\KeyMappings.xml" "$(TargetDir)\data\" /S /Y</PreBuildEvent>
+XCOPY "$(SolutionDir)PUBG_Cartographer\data\KeyMappings.xml" "$(TargetDir)\data\" /S /Y
+XCOPY "$(SolutionDir)PUBG_Cartographer\data\map.jpg" "$(TargetDir)\data\" /S /Y</PreBuildEvent>
   </PropertyGroup>
 </Project>
