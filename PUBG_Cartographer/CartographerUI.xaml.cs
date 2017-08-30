@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using static PUBG_Cartographer.Interface.PUBG_External;
 
 namespace PUBG_Cartographer
 {
@@ -18,7 +19,7 @@ namespace PUBG_Cartographer
         ObservableCollection<int> Buttons = new ObservableCollection<int>();
 
         Process PUBG_game = null;
-        bool wasGameRunning = false;
+        //bool wasGameRunning = false;
 
         private int[] KeyCodes;
         private string[] KeyNames;
@@ -37,39 +38,11 @@ namespace PUBG_Cartographer
             overlay.Show();
         }
 
-        private bool isGameRunning()
-        {
-            var processarray = Process.GetProcessesByName("TslGame");
-            if (processarray.Length >= 1)
-            {
-                PUBG_game = processarray[0];
-                return true;
-            }
-            return false;
-        }
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        private static extern IntPtr GetForegroundWindow();
-
-        private bool isGameInFocus()
-        {
-            //only if pubg is in focus
-            var focusedProcess = GetForegroundWindow();
-            if (isGameRunning())
-            {
-                if (focusedProcess == PUBG_game.MainWindowHandle)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         //Gets called when actual key is pressed on keyboard
         [STAThread]
         private void On_KeyPressed(object sender, GlobalKeyboardHookEventArgs e)
         {
-            if(isGameInFocus())
+            if(isGameInFocus(PUBG_game))
             {
                 if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
                 {
